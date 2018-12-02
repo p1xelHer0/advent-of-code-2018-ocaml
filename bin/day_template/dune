@@ -1,0 +1,3 @@
+(executable
+  (name puzzle)
+  (libraries lib))
