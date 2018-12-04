@@ -2,7 +2,7 @@ open Lib
 
 (* ----- puzzle_1 ----- *)
 
-let parsed_input_puzzle_1 = Utils.read_file "./bin/day_2/input_puzzle_1"
+let parsed_input_puzzle_1 = Utils.read_file "./bin/day_2/input"
 
 let char_input_puzzle_1 = List.map Utils.explode parsed_input_puzzle_1
 
@@ -40,7 +40,7 @@ let puzzle_1 =
 
 (* ----- puzzle_2 ----- *)
 
-let parsed_input_puzzle_2 = Utils.read_file "./bin/day_2/input_puzzle_2"
+let parsed_input_puzzle_2 = Utils.read_file "./bin/day_2/input"
 
 let char_input_puzzle_2 = List.map Utils.explode parsed_input_puzzle_2
 
