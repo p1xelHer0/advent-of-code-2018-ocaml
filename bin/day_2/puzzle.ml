@@ -1,10 +1,10 @@
 open Lib
 
+let parsed_input = Utils.read_file "./bin/day_2/input"
+
+let char_input = List.map Utils.explode parsed_input
+
 (* ----- puzzle_1 ----- *)
-
-let parsed_input_puzzle_1 = Utils.read_file "./bin/day_2/input"
-
-let char_input_puzzle_1 = List.map Utils.explode parsed_input_puzzle_1
 
 let solve_puzzle_1 (xs : char list list) =
   let module CharMap = Map.Make (Char) in
@@ -36,12 +36,8 @@ let solve_puzzle_1 (xs : char list list) =
   |> solve 0 0
 
 let puzzle_1 =
-  solve_puzzle_1 char_input_puzzle_1 |> Printf.printf "day_2_puzzle_1: %d\n%!"
+  solve_puzzle_1 char_input |> Printf.printf "day_2_puzzle_1: %d\n%!"
 
 (* ----- puzzle_2 ----- *)
-
-let parsed_input_puzzle_2 = Utils.read_file "./bin/day_2/input"
-
-let char_input_puzzle_2 = List.map Utils.explode parsed_input_puzzle_2
 
 let puzzle_2 = ()
