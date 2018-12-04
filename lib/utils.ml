@@ -13,3 +13,11 @@ let read_file filename =
     done ;
     !lines
   with End_of_file -> close_in chan ; List.rev !lines
+
+let explode s =
+  let rec exp i l = if i < 0 then l else exp (i - 1) (s.[i] :: l) in
+  exp (String.length s - 1) []
+
+let cons_uniq tl hd = if List.mem hd tl then tl else hd :: tl
+
+let remove_duplicates xs = List.rev (List.fold_left cons_uniq [] xs)
