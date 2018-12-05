@@ -40,4 +40,29 @@ let puzzle_1 =
 
 (* ----- puzzle_2 ----- *)
 
-let puzzle_2 = ()
+let parsed_sample_input = Utils.read_file "./bin/day_2/sample_input"
+
+let solve_puzzle_2 (xs : char list list) =
+  let rec calc_diff words count =
+    match words with
+    | _w1, [] -> count
+    | [], _w2 -> count
+    | hd1 :: tl1, hd2 :: tl2 ->
+        if hd1 = hd2 then calc_diff (tl1, tl2) count
+        else calc_diff (tl1, tl2) (count + 1)
+  in
+  let rec solve xs =
+    let rec loop start rest =
+      match rest with
+      | [] -> solve (List.tl xs)
+      | word :: words ->
+          if calc_diff (start, word) 0 = 1 then (start, word)
+          else loop start words
+    in
+    match xs with hd :: tl -> loop hd tl | _ -> ([], [])
+  in
+  solve xs
+
+let puzzle_2 =
+  solve_puzzle_2 char_input |> fst |> Utils.string_of_chars
+  |> Printf.printf "day_2_puzzle_2: %s\n%!"
