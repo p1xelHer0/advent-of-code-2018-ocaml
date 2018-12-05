@@ -40,8 +40,6 @@ let puzzle_1 =
 
 (* ----- puzzle_2 ----- *)
 
-let parsed_sample_input = Utils.read_file "./bin/day_2/sample_input"
-
 let solve_puzzle_2 (xs : char list list) =
   let rec calc_diff words count =
     match words with
@@ -61,8 +59,17 @@ let solve_puzzle_2 (xs : char list list) =
     in
     match xs with hd :: tl -> loop hd tl | _ -> ([], [])
   in
-  solve xs
+  let remove_common_character words =
+    let rec loop words acc =
+      match words with
+      | [], w2 -> acc @ w2
+      | w1, [] -> acc @ w1
+      | hd1 :: tl1, hd2 :: tl2 ->
+          loop (tl1, tl2) (if hd1 = hd2 then hd1 :: acc else acc)
+    in
+    loop words [] |> List.rev
+  in
+  xs |> solve |> remove_common_character |> Utils.string_of_chars
 
 let puzzle_2 =
-  solve_puzzle_2 char_input |> fst |> Utils.string_of_chars
-  |> Printf.printf "day_2_puzzle_2: %s\n%!"
+  solve_puzzle_2 char_input |> Printf.printf "day_2_puzzle_2: %s\n%!"
