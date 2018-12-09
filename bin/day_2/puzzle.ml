@@ -9,7 +9,7 @@ let char_input = List.map Utils.explode parsed_input
 
 let solve_puzzle_1 (xs : char list list) =
   let module CharMap = Map.Make (Char) in
-  (* -- will add new value or increment an old one until it reaches 3 *)
+  (* will add new value or increment an old one until it reaches 3 *)
   let inc_until_3 key map =
     try
       let value = CharMap.find key map in

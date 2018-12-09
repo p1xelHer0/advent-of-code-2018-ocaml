@@ -19,13 +19,13 @@ let solve_puzzle_2 xs =
   end) in
   let rec find_duplicate value acc_freq set =
     match value with
-    (* -- we've gone through the list once, start over! *)
+    (* we've gone through the list once, start over! *)
     | [] -> find_duplicate xs acc_freq set
     | inputFreq :: rest ->
         let new_freq = acc_freq + inputFreq in
-        (* -- the frequence is already in the test, we found a duplicate *)
+        (* the frequence is already in the test, we found a duplicate *)
         if IntSet.mem new_freq set then new_freq
-          (* -- the new frequency wasnot in the set, contiunue *)
+          (* the new frequency wasnot in the set, contiunue *)
         else find_duplicate rest new_freq (IntSet.add new_freq set)
   in
   find_duplicate xs 0 IntSet.empty
