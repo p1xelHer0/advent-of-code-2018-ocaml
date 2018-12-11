@@ -7,7 +7,7 @@ let char_input = List.map Utils.explode parsed_input
 
 (* ----- puzzle_1 ----- *)
 
-let solve_puzzle_1 (xs : char list list) =
+let solve_puzzle_1 css =
   let module CharMap = Map.Make (Char) in
   (* will add new value or increment an old one until it reaches 3 *)
   let inc_until_3 key map =
@@ -34,7 +34,7 @@ let solve_puzzle_1 (xs : char list list) =
     | 2 :: tl -> solve (twos + 1) threes tl
     | _hd :: tl -> solve twos threes tl
   in
-  xs
+  css
   |> List.map (fun x ->
          (* 
           * for each word, we cound the number of characters up to 3
@@ -42,11 +42,10 @@ let solve_puzzle_1 (xs : char list list) =
           * remove duplicates (according to puzzle instructions)
           *)
          count_2_and_3 x CharMap.empty
-         |> CharMap.bindings |> List.map snd
-         |> List.filter (fun x -> x > 1)
-         |> Utils.remove_duplicates )
+         |> CharMap.filter (fun _key value -> value > 1)
+         |> CharMap.bindings |> List.map snd |> Utils.remove_duplicates )
   (* we now have a list of [2] | [3] | [2, 3] *)
-  (* smoosh the list *)
+  (* "smoosh" 🤪 the list *)
   |> List.fold_left List.append []
   (* count the number of 2's and 3's, multiply the result, we done! *)
   |> solve 0 0
@@ -56,7 +55,7 @@ let puzzle_1 =
 
 (* ----- puzzle_2 ----- *)
 
-let solve_puzzle_2 (xs : char list list) =
+let solve_puzzle_2 css =
   (* calculate the amount of different characters in a word *)
   let rec calc_diff words count =
     match words with
@@ -92,7 +91,7 @@ let solve_puzzle_2 (xs : char list list) =
     in
     loop words [] |> List.rev |> Utils.string_of_chars
   in
-  xs |> solve |> remove_common_character
+  css |> solve |> remove_common_character
 
 let puzzle_2 =
   solve_puzzle_2 char_input |> Printf.printf "day_2_puzzle_2: %s\n%!"

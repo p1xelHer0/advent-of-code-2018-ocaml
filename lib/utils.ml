@@ -1,18 +1,14 @@
-let rec print_list = function
-  | [] -> ()
-  | hd :: tl -> print_string hd ; print_string " " ; print_list tl
-
 let replace input output = Str.global_replace (Str.regexp_string input) output
 
 let read_file filename =
-  let lines = ref [] in
   let chan = open_in filename in
-  try
-    while true do
-      lines := input_line chan :: !lines
-    done ;
-    !lines
-  with End_of_file -> close_in chan ; List.rev !lines
+  let try_read () = try Some (input_line chan) with End_of_file -> None in
+  let rec loop lines =
+    match try_read () with
+    | Some s -> loop (s :: lines)
+    | None -> close_in chan ; List.rev lines
+  in
+  loop []
 
 let explode s =
   let rec exp i l = if i < 0 then l else exp (i - 1) (s.[i] :: l) in
