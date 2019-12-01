@@ -1,12 +1,13 @@
-# Advent of Code 2018 - OCaml
+# ✨ Advent of Code 2018 ✨
 
-My solutions to [Advent of Code 2018](https://adventofcode.com/)
+## My solutions to [Advent of Code 2018](https://adventofcode.com/2018/) written in [OCaml](https://ocaml.org/)
 
+I use [Dune](http://dune.build/) to run the puzzles. In `./bin` you will find each puzzle.
 
-## To run the puzzles
+### Running puzzles
 
-This project uses [Dune](http://dune.build/) to build the puzzles. Follow the installation details there.
+Puzzles are numbered `{1..25}`
 
-```bash
+```
 dune exec bin/day_1/puzzle.exe
 ```
